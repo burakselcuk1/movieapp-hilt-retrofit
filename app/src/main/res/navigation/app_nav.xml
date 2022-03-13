@@ -18,5 +18,23 @@
         android:id="@+id/detailMovieFragment"
         android:name="com.example.moviehilt.ui.DetailMovieFragment"
         android:label="fragment_detail_movie"
-        tools:layout="@layout/fragment_detail_movie" />
+        tools:layout="@layout/fragment_detail_movie" >
+        <action
+            android:id="@+id/action_detailMovieFragment_to_savedMoviesFragment"
+            app:destination="@id/savedMoviesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedMoviesFragment"
+        android:name="com.example.moviehilt.ui.SavedMoviesFragment"
+        android:label="fragment_saved_movies"
+        tools:layout="@layout/fragment_saved_movies" >
+        <action
+            android:id="@+id/action_savedMoviesFragment_to_savedMoviesDetailFragment"
+            app:destination="@id/savedMoviesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedMoviesDetailFragment"
+        android:name="com.example.moviehilt.ui.SavedMoviesDetailFragment"
+        android:label="fragment_saved_movies_detail"
+        tools:layout="@layout/fragment_saved_movies_detail" />
 </navigation>

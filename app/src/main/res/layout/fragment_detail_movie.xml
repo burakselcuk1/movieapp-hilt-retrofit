@@ -11,9 +11,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-
         <ImageView
             android:id="@+id/movieDetailPoster"
             android:layout_width="match_parent"
@@ -46,6 +43,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/movieDetailName"
             app:layout_constraintTop_toBottomOf="@+id/movieDetailName" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveMovieToRoomDb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            app:layout_constraintBottom_toBottomOf="@+id/movieDetailName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.926"
+            app:layout_constraintStart_toEndOf="@+id/movieDetailName"
+            app:layout_constraintTop_toTopOf="@+id/movieDetailName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

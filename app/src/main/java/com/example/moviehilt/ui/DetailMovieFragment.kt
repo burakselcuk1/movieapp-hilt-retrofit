@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.moviehilt.R
 import com.example.moviehilt.Util.Cons.POSTER_MAIN_URL
+import com.example.moviehilt.model.Result
 import com.example.moviehilt.viewModel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail_movie.*
 
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_detail_movie.*
 class DetailMovieFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
+    lateinit var resultMovie:Result
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +43,23 @@ class DetailMovieFragment : Fragment() {
 
         viewModel._movieDetail.observe(this, Observer {
 
-            it.let { response ->
-                movieDetailName.text = response.original_title
-                val url= POSTER_MAIN_URL + response.poster_path
+            it.let {
+                resultMovie = it
+                movieDetailName.text = resultMovie.original_title
+                val url= POSTER_MAIN_URL + resultMovie.poster_path
                 Glide.with(this).load(url).into(movieDetailPoster)
-                movieDetailDescription.text = response.overview
+                movieDetailDescription.text = resultMovie.overview
             }
         })
+
+        saveMovieToRoomDb.setOnClickListener {
+            var bundle = Bundle()
+            resultMovie.let {
+                bundle.putSerializable("movie", resultMovie)
+                val navigationController = Navigation.findNavController(view)
+                navigationController.navigate(R.id.action_detailMovieFragment_to_savedMoviesFragment, bundle)
+            }
+        }
+
     }
 }
