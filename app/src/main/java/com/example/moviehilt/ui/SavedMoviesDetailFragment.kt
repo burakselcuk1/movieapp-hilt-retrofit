@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.moviehilt.R
 import com.example.moviehilt.Util.Cons
@@ -54,17 +56,26 @@ class SavedMoviesDetailFragment : Fragment() {
         })
 
         deleteMovieFromRoomDb.setOnClickListener {
-            viewModel._movieDetail.observe(this, Observer {
-                viewModel.deleteMovie(it)
-                Toast.makeText(view!!.context , "movie deleted", Toast.LENGTH_SHORT).show()
-
-                val navigationController = Navigation.findNavController(view)
-                navigationController.navigate(R.id.action_savedMoviesDetailFragment_to_savedMoviesFragment)
-            })
+            deleteMovie()
         }
-
     }
+    private fun deleteMovie() {
+        viewModel._movieDetail.observe(viewLifecycleOwner, Observer {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setPositiveButton("Yes"){_, _ ->
+                viewModel.deleteMovie(it)
+                findNavController().navigate(R.id.action_savedMoviesDetailFragment_to_savedMoviesFragment)
+                Toast.makeText(requireContext(),"Movie deleted!", Toast.LENGTH_SHORT).show()
 
+
+            }
+            builder.setNegativeButton("No"){_, _ ->}
+            builder.setTitle("Delete ${it.original_title}")
+            builder.setMessage("Are you sure delete this movie ${it.original_title} ?")
+            builder.create().show()
+
+        })
+    }
 
 
 }
