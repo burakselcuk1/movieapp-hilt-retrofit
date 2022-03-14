@@ -36,5 +36,9 @@
         android:id="@+id/savedMoviesDetailFragment"
         android:name="com.example.moviehilt.ui.SavedMoviesDetailFragment"
         android:label="fragment_saved_movies_detail"
-        tools:layout="@layout/fragment_saved_movies_detail" />
+        tools:layout="@layout/fragment_saved_movies_detail" >
+        <action
+            android:id="@+id/action_savedMoviesDetailFragment_to_savedMoviesFragment"
+            app:destination="@id/savedMoviesFragment" />
+    </fragment>
 </navigation>

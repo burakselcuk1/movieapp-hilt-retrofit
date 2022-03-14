@@ -62,7 +62,6 @@ class RoomAdapter(private val dataSet: ArrayList<Result>) :
             val bundle = Bundle()
             bundle.putString("movieIdd", ""+result.id)
 
-
             val navigationController = Navigation.findNavController(viewHolder.itemView)
             navigationController.navigate(R.id.action_savedMoviesFragment_to_savedMoviesDetailFragment,bundle!!)
 
