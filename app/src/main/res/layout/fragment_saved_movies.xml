@@ -5,8 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.SavedMoviesFragment">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefleshForSavedMovies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saved_movie_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </FrameLayout>

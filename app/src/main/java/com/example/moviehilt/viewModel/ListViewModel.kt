@@ -21,7 +21,7 @@ class ListViewModel @Inject constructor(private val repository: movieRepository)
         getMovies()
     }
 
-    private fun getMovies()=viewModelScope.launch {
+     fun getMovies()=viewModelScope.launch {
     repository.getMovies().let {response ->
         if (response.isSuccessful){
             _movie.postValue(response.body())

@@ -62,6 +62,17 @@ class SavedMoviesFragment : Fragment() {
             saved_movie_recyclerview.adapter = roomAdapter
         })
 
+        swipeRefleshForSavedMovies.setOnRefreshListener {
+            saved_movie_recyclerview.visibility = View.GONE
+            savedMovieViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+                roomAdapter = RoomAdapter(it as ArrayList<Result>)
+                saved_movie_recyclerview.adapter = roomAdapter
+                saved_movie_recyclerview.visibility = View.VISIBLE
+                swipeRefleshForSavedMovies.isRefreshing = false
+            })
+
+        }
+
 
     }
 

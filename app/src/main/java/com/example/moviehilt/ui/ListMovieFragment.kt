@@ -40,5 +40,16 @@ class ListMovieFragment : Fragment() {
             recyclerView.adapter = adapter
         })
 
+        swipeReflesh.setOnRefreshListener {
+            recyclerView.visibility = View.GONE
+            viewModel._movie.observe(this, Observer {
+                adapter = MovieAdapter(it)
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = adapter
+                recyclerView.visibility = View.VISIBLE
+                swipeReflesh.isRefreshing = false
+            })
+        }
+
     }
 }
